@@ -4,6 +4,9 @@ use pcaster::io::AudioReader;
 use plotly::common::Mode;
 use plotly::{Plot, Scatter};
 
+/// This example demonstrates how to read an audio file and plot its waveform.
+/// Plotly is a dev dependency, if you want to create a plot in your own project,
+/// you need to implement your own plotting.
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let path = PathBuf::from("audio/sin_100Hz_-3dBFS_3s.wav");
     
@@ -14,7 +17,6 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("Channels: {}", reader.channels());
     
     let mut all_samples = Vec::new();
-    
     while let Ok(Some(samples)) = reader.read_packet() {
         all_samples.extend(samples);
     }
