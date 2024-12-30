@@ -10,4 +10,5 @@
 
 - io: Crate for File I/O
 - analytic: Create for audio analysis, metrics
-- process: Crate for audio processing and enahncement
+- process: Crate for audio processing and enhancement
+

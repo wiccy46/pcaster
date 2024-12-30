@@ -4,3 +4,8 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
+plotters = "0.3.7"
+symphonia = "0.5.4"
+
+[dev-dependencies]
+plotly = "0.11.0"
