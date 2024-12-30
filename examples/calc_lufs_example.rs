@@ -18,9 +18,11 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     println!("\nTotal samples read: {}", all_samples.len());
 
-    let mut meter = Meter::new(reader.channels() as u32, reader.sample_rate());
-
-    meter.add_frames_f32(&all_samples);
+    let meter = Meter::new(
+        &all_samples,
+        reader.channels() as u32,
+        reader.sample_rate()
+    );
 
     let integrated_lufs = meter.lufs_integrated().unwrap();
     let short_term_lufs = meter.lufs_shortterm().unwrap();

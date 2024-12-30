@@ -9,19 +9,17 @@ pub struct Meter {
 }
 
 impl Meter {
-    pub fn new(channels: u32, sample_rate: u32) -> Self {
+    /// Create a new loudness meter based on a vec of interleaved samples in f32
+    pub fn new(samples: &[f32], channels: u32, sample_rate: u32) -> Self {
         let modes = Mode::I | Mode::S | Mode::TRUE_PEAK;
-        let meter = EbuR128::new(channels, sample_rate, modes)
+        let mut meter = EbuR128::new(channels, sample_rate, modes)
             .expect("Failed to create EBU R128 meter");
+        meter.add_frames_f32(samples).expect("Failed to add frames to meter");
         Self {
             meter,
             channels,
             sample_rate
         }
-    }
-
-    pub fn add_frames_f32(&mut self, samples: &[f32]) {
-        self.meter.add_frames_f32(samples).ok();
     }
 
     pub fn lufs_integrated(&self) -> Option<f64> {
