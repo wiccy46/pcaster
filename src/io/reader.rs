@@ -3,7 +3,7 @@ use std::path::Path;
 
 use symphonia::core::codecs::{Decoder, DecoderOptions, CODEC_TYPE_NULL, CodecParameters};
 use symphonia::core::formats::{FormatOptions, FormatReader, Track};
-use symphonia::core::audio::{AudioBufferRef, Signal, SampleBuffer, AudioBuffer};
+use symphonia::core::audio::SampleBuffer;
 use symphonia::core::io::MediaSourceStream;
 use symphonia::core::meta::MetadataOptions;
 use symphonia::core::errors::Error as SymphoniaError;
