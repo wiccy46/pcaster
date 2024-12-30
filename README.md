@@ -12,3 +12,7 @@
 - analytic: Create for audio analysis, metrics
 - process: Crate for audio processing and enhancement
 
+## Usage
+
+Check `examples` folder for example usage. e.g. run `cargo run --example calc_lufs_example` to 
+calculate LUFS and true peaks of an audio file.
