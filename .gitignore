@@ -1,6 +1,7 @@
 /target
-.DS_Store
 
 .stfolder
 .syncthing.*
 .idea
+tmp/
+.DS_Store
