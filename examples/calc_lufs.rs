@@ -18,18 +18,14 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     println!("\nTotal samples read: {}", all_samples.len());
 
-    let meter = Meter::new(
-        &all_samples,
-        reader.channels() as u32,
-        reader.sample_rate()
-    );
+    let meter = Meter::new(&all_samples, reader.channels() as u32, reader.sample_rate());
 
-    let integrated_lufs = meter.lufs_integrated().unwrap();
-    let short_term_lufs = meter.lufs_shortterm().unwrap();
-    let true_peaks = meter.true_peaks().unwrap();
+    let integrated_lufs: f64 = meter.lufs_integrated().unwrap();
+    let short_term_lufs: f64 = meter.lufs_shortterm().unwrap();
+    let true_peaks: Vec<f64> = meter.true_peaks().unwrap();
 
     println!("Integrated LUFS: {:?}", integrated_lufs);
     println!("Short-term LUFS: {:?}", short_term_lufs);
-    println!("True peaks: {:?}", true_peaks);  // This is a vec per channel
+    println!("True peaks: {:?}", true_peaks); // This is a vec per channel
     Ok(())
 }

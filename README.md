@@ -14,5 +14,5 @@
 
 ## Usage
 
-Check `examples` folder for example usage. e.g. run `cargo run --example calc_lufs_example` to 
+Check `examples` folder for example usage. e.g. run `cargo run --example calc_lufs` to 
 calculate LUFS and true peaks of an audio file.
