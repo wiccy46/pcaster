@@ -2,15 +2,24 @@
 
 ## Feature Overview
 
+- Read and write audio files in various formats to floating point vector
+  - `pcaster::io::AudioReader` for reading audio files
+  - `pcaster::io::AudioWriter` for writing audio files
 - Analyze your podcast audio and report statistics relevant to publishing major platforms
+  - `pcaster::analytic::Meter` for LUFS, true peaks
 - Audio signal processing focused on complying to platforms' audio requirements
+  - TODO.
 - Speech quality analysis and enhancement
+  - TODO.
+
+The tool focuses on podcast audio but in a nutshell it is for general audio processing. 
+So you if you find it useful it can work on other audio contents as well.
 
 ## Library Overview
 
-- io: Crate for File I/O
-- analytic: Create for audio analysis, metrics
-- process: Crate for audio processing and enhancement
+- `pcaster::io`: Crate for File I/O
+- `pcaster::analytic`: Create for audio analysis, metrics
+- `pcaster::process`: Crate for audio processing and enhancement
 
 ## Usage
 
