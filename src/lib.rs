@@ -15,23 +15,30 @@
 //! 
 //! ## Example
 //! 
-//! ```rust
+//! ```no_run
 //! use pcaster::io::AudioReader;
 //! use pcaster::process::{AudioNodeChain, GainNode};
+//! use std::error::Error;
 //! 
-//! // Read audio file
-//! let mut reader = AudioReader::new("audio.wav")?;
-//! let mut samples = Vec::new();
-//! while let Ok(Some(packet)) = reader.read_packet() {
-//!     samples.extend(packet);
+//! fn main() -> Result<(), Box<dyn Error>> {
+//!     // Read audio file, replace with your own path to an audio file
+//!     let mut reader = AudioReader::new("audio.wav")?;
+//!     let mut samples = Vec::new();
+//!     
+//!     while let Ok(Some(packet)) = reader.read_packet() {
+//!         samples.extend(packet);
+//!     }
+//!     
+//!     // Create a processing chain with gain adjustment
+//!     let mut chain = AudioNodeChain::new();
+//!     chain.add_node(GainNode::new(6.0));  // +6 dB gain
+//!     
+//!     // Process the audio
+//!     let processed = chain.process(&samples);
+//!     
+//!     println!("Processed {} samples", processed.len());
+//!     Ok(())
 //! }
-//! 
-//! // Create a processing chain with gain adjustment
-//! let mut chain = AudioNodeChain::new();
-//! chain.add_node(GainNode::new(6.0));  // +6 dB gain
-//! 
-//! // Process the audio
-//! let processed = chain.process(&samples);
 //! ```
 //! 
 //! ## Modules

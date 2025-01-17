@@ -1,23 +1,78 @@
+//! Gain adjustment processing node.
+//! 
+//! This module provides functionality for adjusting audio gain (volume) using decibels (dB).
+//! The gain adjustment is performed using the standard audio industry formula:
+//! linear_gain = 10^(dB/20)
+//! 
+//! # Example
+//! 
+//! ```no_run
+//! use pcaster::process::{AudioNode, GainNode};
+//! 
+//! // Create a gain node that amplifies by 6 dB
+//! let node = GainNode::new(6.0);
+//! 
+//! // Process some audio
+//! let input = vec![0.5f32; 1000];
+//! let output = node.process(&input);  // Samples will be amplified by ~1.995
+//! ```
+
 use super::node::AudioNode;
 
-/// Represents a gain adjustment operation that can be undone
+/// An audio processing node that applies gain adjustment in decibels.
+/// 
+/// This node can both amplify (positive dB) and attenuate (negative dB) audio signals.
+/// The gain is applied uniformly to all samples, maintaining the relative dynamics
+/// of the audio.
+/// 
+/// # Examples
+/// 
+/// ```no_run
+/// use pcaster::process::{AudioNode, GainNode};
+/// 
+/// // Amplify by 6 dB (approximately doubles the amplitude)
+/// let amplify = GainNode::new(6.0);
+/// 
+/// // Attenuate by 6 dB (approximately halves the amplitude)
+/// let attenuate = GainNode::new(-6.0);
+/// 
+/// let input = vec![0.5f32; 1000];
+/// let louder = amplify.process(&input);
+/// let quieter = attenuate.process(&input);
+/// ```
 #[derive(Clone)]
 pub struct GainNode {
     db: f32,
 }
 
 impl GainNode {
-    /// Create a new gain node
+    /// Creates a new gain node with the specified dB value.
+    /// 
+    /// # Arguments
+    /// 
+    /// * `db` - Gain in decibels (positive for amplification, negative for attenuation)
+    /// 
+    /// # Examples
+    /// 
+    /// ```no_run
+    /// use pcaster::process::GainNode;
+    /// 
+    /// let node = GainNode::new(6.0);  // +6 dB gain
+    /// ```
     pub fn new(db: f32) -> Self {
         Self { db }
     }
     
-    /// Get the current gain in dB
+    /// Returns the current gain setting in dB.
     pub fn db(&self) -> f32 {
         self.db
     }
     
-    /// Set the gain in dB
+    /// Sets a new gain value in dB.
+    /// 
+    /// # Arguments
+    /// 
+    /// * `db` - New gain value in decibels
     pub fn set_db(&mut self, db: f32) {
         self.db = db;
     }
@@ -47,12 +102,31 @@ impl AudioNode for GainNode {
     }
 }
 
-// Convenience functions
+/// Convenience function to apply gain adjustment to samples.
+/// 
+/// This function creates a temporary GainNode and processes the samples.
+/// 
+/// # Arguments
+/// 
+/// * `samples` - Input audio samples
+/// * `db` - Gain adjustment in decibels
+/// 
+/// # Returns
+/// 
+/// A new vector containing the gain-adjusted samples
 pub fn gain_db(samples: &[f32], db: f32) -> Vec<f32> {
     let node = GainNode::new(db);
     node.process(samples)
 }
 
+/// Convenience function to apply gain adjustment to samples in-place.
+/// 
+/// This function creates a temporary GainNode and processes the samples in-place.
+/// 
+/// # Arguments
+/// 
+/// * `samples` - Mutable slice of audio samples to adjust
+/// * `db` - Gain adjustment in decibels
 pub fn gain_db_in_place(samples: &mut [f32], db: f32) {
     let node = GainNode::new(db);
     node.process_in_place(samples);
