@@ -7,6 +7,7 @@ edition = "2021"
 ebur128 = "0.1.10"
 hound = "3.5.1"
 plotters = "0.3.7"
+rstest = "0.24.0"
 symphonia = "0.5.4"
 
 [dev-dependencies]
