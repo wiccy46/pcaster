@@ -1,12 +1,20 @@
 [package]
 name = "pcaster"
 version = "0.1.0"
+authors = ["Jiajun Yang <thejyang@gmail.com>"]
 edition = "2021"
+description = "An audio processing library for Loudness Measurement and Adjustment"
+documentation = "https://docs.rs/pcaster"
+repository = "https://github.com/wiccy46/pcaster"
+license = "MIT OR Apache-2.0"
+keywords = ["audio", "dsp", "processing", "effects"]
+categories = ["multimedia::audio"]
 
 [dependencies]
 ebur128 = "0.1.10"
 hound = "3.5.1"
 plotters = "0.3.7"
+rstest = "0.24.0"
 symphonia = "0.5.4"
 
 [dev-dependencies]
