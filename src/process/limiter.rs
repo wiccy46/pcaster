@@ -1,4 +1,5 @@
 use std::collections::VecDeque;
+use std::cell::{Cell, RefCell};
 use super::node::AudioNode;
 
 
@@ -6,8 +7,8 @@ use super::node::AudioNode;
 pub struct LimiterNode {
     threshold: f32,
     release_coeff: f32,
-    envelope: f32,
-    lookahead_buffer: VecDeque<f32>,
+    envelope: Cell<f32>,
+    lookahead_buffer: RefCell<VecDeque<f32>>,
     lookahead_samples: usize,
 }
 
@@ -21,42 +22,44 @@ impl LimiterNode {
         let release_coeff = (-1.0 / (sample_rate * release_time_sec)).exp();
         let lookahead_samples = (lookahead_sec * sample_rate) as usize;
 
-        LimiterNode {
+        Self {
             threshold,
             release_coeff,
-            envelope: 0.0,
-            lookahead_buffer: VecDeque::with_capacity(lookahead_samples),
+            envelope: Cell::new(0.0),
+            lookahead_buffer: RefCell::new(VecDeque::with_capacity(lookahead_samples)),
             lookahead_samples,
         }
     }
 
-    pub fn process_sample(&mut self, sample: f32) -> f32 {
-        self.lookahead_buffer.push_back(sample);
+    pub fn process_sample(&self, sample: f32) -> f32 {
+        let mut buffer = self.lookahead_buffer.borrow_mut();
+        buffer.push_back(sample);
 
-        // If lookahead not full, return 0.0, TODO: Can do fade in instead
-        if self.lookahead_buffer.len() > self.lookahead_samples {
+        if buffer.len() < self.lookahead_samples {
             return 0.0;
         }
-        let future_idx = self.lookahead_buffer.len() - 1;
-        let future_sample = self.lookahead_buffer[future_idx];
 
+        let future_idx = buffer.len() - 1;
+        let future_sample = buffer[future_idx];
+        
         let input_lvl = future_sample.abs();
-        if input_lvl > self.envelope {
-            self.envelope = input_lvl;
+        let mut envelope = self.envelope.get();
+        
+        if input_lvl > envelope {
+            envelope = input_lvl;
         } else {
-            // release
-            self.envelope = self.release_coeff * self.envelope
-                            + (1.0 - self.release_coeff) * input_lvl;
+            envelope = self.release_coeff * envelope + (1.0 - self.release_coeff) * input_lvl;
         }
+        self.envelope.set(envelope);
 
-        let gain = if self.envelope > self.threshold {
-            self.threshold / self.envelope
+        let gain = if envelope > self.threshold {
+            self.threshold / envelope
         } else {
             1.0
         };
 
-        let output_sample = self.lookahead_buffer.pop_front().unwrap() * gain;
-
+        let output_sample = buffer.pop_front().unwrap() * gain;
+        
         output_sample
     }
 
@@ -66,10 +69,9 @@ impl LimiterNode {
 impl AudioNode for LimiterNode {
     fn process(&self, input_buffer: &[f32]) -> Vec<f32> {
         let mut out = Vec::with_capacity(input_buffer.len());
-
         for &sample in input_buffer {
-           let limited = self.process_sample(sample);
-           out.push(limited);
+            let limited = self.process_sample(sample);
+            out.push(limited);
         }
         out
     }
@@ -78,7 +80,6 @@ impl AudioNode for LimiterNode {
         buffer.iter_mut().for_each(|sample| {
             *sample = self.process_sample(*sample);
         });
-
     }
     
     fn node_type(&self) -> &'static str {
