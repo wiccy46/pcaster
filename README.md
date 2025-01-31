@@ -8,7 +8,8 @@
 - Analyze your podcast audio and report statistics relevant to publishing major platforms
   - `pcaster::analytic::Meter` for LUFS, true peaks
 - Audio signal processing focused on complying to platforms' audio requirements
-  - TODO.
+  - `pcaster::process::LimiterNode` for limiting audio amplitude
+  - `pcaster::process::GainNode` for adjusting audio level
 - Speech quality analysis and enhancement
   - TODO.
 
