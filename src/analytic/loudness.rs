@@ -21,7 +21,7 @@ use ebur128::{EbuR128, Mode};
 /// use pcaster::analytic::Meter;
 /// 
 /// let samples = vec![0.0f32; 1000];
-/// let meter = Meter::new(&samples, 2, 44100);
+/// let meter = Meter::new(&samples, 1, 44100);
 /// 
 /// if let Some(lufs) = meter.lufs_integrated() {
 ///     println!("Integrated LUFS: {}", lufs);
