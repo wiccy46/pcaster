@@ -1,6 +1,6 @@
 extern crate plotly;
 use std::path::PathBuf;
-use pcaster::io::AudioReader;
+use sonex::io::AudioReader;
 use plotly::common::Mode;
 use plotly::{Plot, Scatter};
 

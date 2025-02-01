@@ -7,7 +7,7 @@
 //! # Example
 //! 
 //! ```no_run
-//! use pcaster::process::{AudioNode, GainNode};
+//! use sonex::process::{AudioNode, GainNode};
 //! 
 //! // Create a gain node that amplifies by 6 dB
 //! let node = GainNode::new(6.0);
@@ -28,7 +28,7 @@ use super::node::AudioNode;
 /// # Examples
 /// 
 /// ```no_run
-/// use pcaster::process::{AudioNode, GainNode};
+/// use sonex::process::{AudioNode, GainNode};
 /// 
 /// // Amplify by 6 dB (approximately doubles the amplitude)
 /// let amplify = GainNode::new(6.0);
@@ -55,7 +55,7 @@ impl GainNode {
     /// # Examples
     /// 
     /// ```no_run
-    /// use pcaster::process::GainNode;
+    /// use sonex::process::GainNode;
     /// 
     /// let node = GainNode::new(6.0);  // +6 dB gain
     /// ```

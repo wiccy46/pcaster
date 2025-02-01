@@ -18,7 +18,7 @@ use ebur128::{EbuR128, Mode};
 /// # Example
 /// 
 /// ```no_run
-/// use pcaster::analytic::Meter;
+/// use sonex::analytic::Meter;
 /// 
 /// let samples = vec![0.0f32; 1000];
 /// let meter = Meter::new(&samples, 1, 44100);

@@ -8,7 +8,7 @@
 //! # Example
 //! 
 //! ```no_run
-//! use pcaster::process::{AudioNode, AudioNodeChain, GainNode};
+//! use sonex::process::{AudioNode, AudioNodeChain, GainNode};
 //! 
 //! // Create a processing chain
 //! let mut chain = AudioNodeChain::new();
@@ -29,7 +29,7 @@
 /// # Examples
 /// 
 /// ```no_run
-/// use pcaster::process::AudioNode;
+/// use sonex::process::AudioNode;
 /// 
 /// struct MyNode {
 ///     gain: f32,
@@ -103,7 +103,7 @@ pub trait AudioNode {
 /// # Example
 /// 
 /// ```no_run
-/// use pcaster::process::{AudioNodeChain, GainNode};
+/// use sonex::process::{AudioNodeChain, GainNode};
 /// 
 /// let mut chain = AudioNodeChain::new();
 /// 

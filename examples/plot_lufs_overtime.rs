@@ -1,5 +1,5 @@
 use std::path::PathBuf;
-use pcaster::{io::AudioReader, analytic::Meter};
+use sonex::{io::AudioReader, analytic::Meter};
 use plotly::common::Mode;
 use plotly::{Plot, Scatter};
 

@@ -17,7 +17,7 @@ use crate::io::AudioReader;
 /// # Example
 /// 
 /// ```no_run
-/// use pcaster::io::AudioWriter;
+/// use sonex::io::AudioWriter;
 /// 
 /// let mut writer = AudioWriter::new("output.wav", 2, 44100).unwrap();
 /// let samples = vec![0.0f32; 1000];

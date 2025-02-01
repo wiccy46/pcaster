@@ -24,7 +24,7 @@ use symphonia::default::get_probe;
 /// # Example
 /// 
 /// ```no_run
-/// use pcaster::io::AudioReader;
+/// use sonex::io::AudioReader;
 /// 
 /// let mut reader = AudioReader::new("audio.wav").unwrap();
 /// println!("Sample rate: {} Hz", reader.sample_rate());

@@ -1,5 +1,5 @@
-use pcaster::analytic::Meter;
-use pcaster::io::AudioReader;
+use sonex::analytic::Meter;
+use sonex::io::AudioReader;
 use std::path::PathBuf;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {

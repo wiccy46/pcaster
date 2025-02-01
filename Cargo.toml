@@ -1,11 +1,11 @@
 [package]
-name = "pcaster"
+name = "sonex"
 version = "0.1.0"
 authors = ["Jiajun Yang <thejyang@gmail.com>"]
 edition = "2021"
 description = "An audio processing library for Loudness Measurement and Adjustment"
-documentation = "https://docs.rs/pcaster"
-repository = "https://github.com/wiccy46/pcaster"
+documentation = "https://docs.rs/sonex"
+repository = "https://github.com/wiccy46/sonex"
 license = "MIT OR Apache-2.0"
 keywords = ["audio", "dsp", "processing", "effects"]
 categories = ["multimedia::audio"]

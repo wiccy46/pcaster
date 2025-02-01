@@ -1,6 +1,6 @@
 use std::path::PathBuf;
-use pcaster::io::AudioReader;
-use pcaster::io::AudioWriter;
+use sonex::io::AudioReader;
+use sonex::io::AudioWriter;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let path = PathBuf::from("audio/sin_100Hz_-3dBFS_3s.wav");

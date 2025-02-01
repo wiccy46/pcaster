@@ -1,6 +1,6 @@
-//! # PCaster
+//! # sonex
 //! 
-//! `pcaster` is an audio processing library written in Rust that provides tools for reading, 
+//! `sonex` is an audio processing library written in Rust that provides tools for reading, 
 //! processing, and analyzing audio data.
 //! 
 //! ## Features
@@ -16,8 +16,8 @@
 //! ## Example
 //! 
 //! ```no_run
-//! use pcaster::io::AudioReader;
-//! use pcaster::process::{AudioNodeChain, GainNode};
+//! use sonex::io::AudioReader;
+//! use sonex::process::{AudioNodeChain, GainNode};
 //! use std::error::Error;
 //! 
 //! fn main() -> Result<(), Box<dyn Error>> {
