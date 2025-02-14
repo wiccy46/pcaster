@@ -3,13 +3,13 @@
 ## Feature Overview
 
 - Read and write audio files in various formats to floating point vector
-  - `pcaster::io::AudioReader` for reading audio files
-  - `pcaster::io::AudioWriter` for writing audio files
+  - `sonnex::io::AudioReader` for reading audio files
+  - `sonnex::io::AudioWriter` for writing audio files
 - Analyze your podcast audio and report statistics relevant to publishing major platforms
-  - `pcaster::analytic::Meter` for LUFS, true peaks
+  - `sonnex::analytic::Meter` for LUFS, true peaks
 - Audio signal processing focused on complying to platforms' audio requirements
-  - `pcaster::process::LimiterNode` for limiting audio amplitude
-  - `pcaster::process::GainNode` for adjusting audio level
+  - `sonnex::process::LimiterNode` for limiting audio amplitude
+  - `sonnex::process::GainNode` for adjusting audio level
 - Speech quality analysis and enhancement
   - TODO.
 
@@ -18,9 +18,9 @@ So you if you find it useful it can work on other audio contents as well.
 
 ## Library Overview
 
-- `pcaster::io`: Crate for File I/O
-- `pcaster::analytic`: Create for audio analysis, metrics
-- `pcaster::process`: Crate for audio processing and enhancement
+- `sonnex::io`: Crate for File I/O
+- `sonnex::analytic`: Create for audio analysis, metrics
+- `sonnex::process`: Crate for audio processing and enhancement
 
 ## Usage
 
@@ -30,8 +30,8 @@ calculate LUFS and true peaks of an audio file.
 ### Analyze LUFS
 
 ```rust
-use pcaster::analytic::Meter;
-use pcaster::io::AudioReader;
+use sonnex::analytic::Meter;
+use sonnex::io::AudioReader;
 use std::path::PathBuf;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
